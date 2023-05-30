@@ -3,8 +3,16 @@ import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
+import About from './components/About';
 import Alert from './components/Alert';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+
+} from "react-router-dom";
+
 
 
 
@@ -42,13 +50,23 @@ export default function App() {
 
   return (
    <>
+   <Router>
      <Navbar title="TextUtils" tr = "about" mode={mode} toggleMode={toggleMode}/>
      <Alert alert={alert}/>
 
      <div className="container  my-3">
-          <TextForm heading="Enter the text to analyze below" showAlert={showAlert} mode={mode}/>
+     <Switch>
+          <Route path="/about">
+            <About  mode={mode}/>
+          </Route>
+          <Route path="/">
+          <TextForm heading="Try TextUtils- Word Counter, Character Counter, Remove extra spaces" showAlert={showAlert} mode={mode}/>
+          </Route>
+        </Switch>
+          
      </div>
-     {/* <About/> */}
+     </Router>
+      
     </>
   );
 }
